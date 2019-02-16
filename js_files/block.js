@@ -15,5 +15,6 @@ class Block {
             Hash      : ${this.hashValue.substring(0, 10)}
             Data      : ${this.data}`;
     }
-
 }
+
+    module.exports = Block;
