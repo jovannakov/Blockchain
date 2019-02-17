@@ -1,4 +1,5 @@
 const  Block = require("../js_files/block");
+const Blockchain = require("../js_files/blockchain");
 
 var block = Block.mineBlock(Block.genesis(), "First mined block");
 console.log(block.toString());
