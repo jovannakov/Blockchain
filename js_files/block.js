@@ -21,6 +21,12 @@ class Block {
         return new this(date.getHours()+ ":" + date.getMinutes()+ ":" + date.getSeconds(), "----------", "f1r5t-h45h", []);
     }
 
+    static mineBlock(lastHash, data){
+        var timestamp = Date.now();
+        var hash = 'todo-hash';
+        return new Block(timestamp, lastHash, hash, data);
+    }
+
 }
 
     module.exports = Block;
