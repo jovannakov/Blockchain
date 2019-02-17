@@ -15,6 +15,12 @@ class Block {
             Hash      : ${this.hashValue.substring(0, 10)}
             Data      : ${this.data}`;
     }
+
+    static genesis(){
+        var date = new Date();
+        return new this(date.getHours()+ ":" + date.getMinutes()+ ":" + date.getSeconds(), "----------", "f1r5t-h45h", []);
+    }
+
 }
 
     module.exports = Block;
