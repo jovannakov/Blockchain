@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-test" : "nodemon ./tests/dev-test"
+    "dev-test": "nodemon ./tests/dev-test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
   }
 }
