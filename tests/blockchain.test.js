@@ -37,4 +37,27 @@ describe("Blockchain" , ()  => {
         expect(bc.isChainValid(bc2.chain)).toBe(false);
     });
 
+    it("tests if the received chain is not longer than the current", () => {
+       bc.addBlock('foo');
+       bc.replaceChain(bc2.chain);
+
+       expect(bc.chain).not.toEqual(bc2.chain);
+    });
+
+    it("tests if the received chain is not valid", () => {
+        bc2.addBlock('foo');
+        bc2.addBlock('boo');
+        bc2.chain[1].data = 'cocoo';
+        bc.replaceChain(bc2.chain);
+
+        expect(bc.chain).not.toEqual(bc2.chain);
+    });
+
+    it("tests if the chain has been replaced", ()=>{
+       bc2.addBlock("foo");
+       bc.replaceChain(bc2.chain);
+
+       expect(bc.chain).toEqual(bc2.chain);
+    });
+
 });
