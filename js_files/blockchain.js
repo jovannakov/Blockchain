@@ -29,6 +29,19 @@ class Blockchain{
       //  Console.log("The chain is Valid!");
         return true;
     }
+
+
+    replaceChain(newChain){
+        if(newChain.length <= this.chain.length){
+                console.log("The received chain is not longer than the current chain.");
+                return;
+            } else if(!this.isChainValid(newChain)){
+                console.log("The received chain is not valid!");
+                return;
+            }
+        console.log("The current chain is being replaced!");
+        this.chain = newChain;
+        }
 }
 
 module.exports = Blockchain;
