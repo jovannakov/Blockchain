@@ -20,18 +20,19 @@ class Block {
 
     static genesis(){
         var date = new Date();
-        return new this(date.getHours()+ ":" + date.getMinutes()+ ":" + date.getSeconds(), "----------", "f1r5t-h45h", []);
+        return new this(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`, "----------", "f1r5t-h45h", []);
     }
 
     static mineBlock(lastBlock, data){
-        var timestamp = Date.now();
+        var date = new Date();
+        var timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
         var lastHash = lastBlock.hashValue;
         var hashVal = Block.hash(timestamp, lastHash, data);
         return new Block(timestamp, lastHash, hashVal, data);
     }
 
     static hash(timestamp, lastHash, data){
-        return SHA256(`${timestamp}${lastHash}${data }`).toString();
+        return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
     static blockHash(block){
