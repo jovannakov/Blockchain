@@ -20,14 +20,8 @@ app.get('/blocks', (req, res)=>{
 });
 
 
-app.get('/', (req, res) => {
-   res.sendFile('index.html', {root : path.join(__dirname, "../views")});
-});
-
 app.post('/mine', (req, res) => {
-    console.log(req.body);
-
-   const block = blockchain.addBlock("JOVAN");
+   const block = blockchain.addBlock(req.body.data);
    console.log(`New block added ${block.toString()}`);
    res.redirect('/blocks');
 });
