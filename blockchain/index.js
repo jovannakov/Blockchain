@@ -15,6 +15,7 @@ class Index{
     isChainValid(chain){
         if(JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())){
          //   Console.log("The first block of the chain is not the Genesis block. The chain is not Valid.");
+            console.log("Genesis wrong");
             return false;
         }
         for(let i = 1; i < chain.length; i++){

@@ -19,8 +19,7 @@ class Block {
     }
 
     static genesis(){
-        var date = new Date();
-        return new this(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`, "----------", "f1r5t-h45h", []);
+        return new this('Genesis time', "----------", "f1r5t-h45h", []);
     }
 
     static mineBlock(lastBlock, data){
