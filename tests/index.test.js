@@ -22,6 +22,8 @@ describe("Blockchain" , ()  => {
    it ("tests if a chain is valid", ()=>{
         bc2.addBlock("foo");
         bc2.addBlock("bar");
+        bc2.addBlock("bar");
+        bc2.addBlock("bar");
         expect(bc.isChainValid(bc2.chain)).toBe(true);
    });
 
@@ -32,6 +34,8 @@ describe("Blockchain" , ()  => {
 
     it("tests if a chain has corrupt block on some point", ()=>{
         bc2.addBlock("foo");
+        bc2.addBlock("bar");
+        bc2.addBlock("bar");
         bc2.addBlock("bar");
         bc2.chain[2].data = "Pero";
         expect(bc.isChainValid(bc2.chain)).toBe(false);
