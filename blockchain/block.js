@@ -1,11 +1,16 @@
 const SHA256 = require('crypto-js/sha256');
+const { DIFFICULTY } = require("../config");
+
+
 
 class Block {
-    constructor(timestamp, lastHash, hashValue, data) {
+
+    constructor(timestamp, lastHash, hashValue, data, nonce) {
         this.timestamp = timestamp;
         this.lastHash = lastHash;
         this.hashValue = hashValue;
         this.data = data;
+        this.nonce=nonce;
     }
 
     toString(){
@@ -15,28 +20,38 @@ class Block {
             Timestamp : ${this.timestamp}
             Last hash : ${this.lastHash.substring(0, 10)}
             Hash      : ${this.hashValue.substring(0, 10)}
-            Data      : ${this.data}`;
+            Data      : ${this.data}
+            Nonce     : ${this.nonce}`;
     }
 
     static genesis(){
-        return new this('Genesis time', "----------", "f1r5t-h45h", []);
+        return new this('Genesis time', "----------", "f1r5t-h45h", [], 0);
     }
 
     static mineBlock(lastBlock, data){
-        var date = new Date();
-        var timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-        var lastHash = lastBlock.hashValue;
-        var hashVal = Block.hash(timestamp, lastHash, data);
-        return new Block(timestamp, lastHash, hashVal, data);
+        let start = Date.now();
+        let timestamp;
+        let lastHash = lastBlock.hashValue;
+        let hashVal;
+        let nonce = 0;
+        do{
+            console.log("nonce:",nonce);
+            timestamp = Date.now();
+            hashVal = Block.hash(timestamp, lastHash, data, nonce);
+            nonce++;
+        }while(hashVal.substring(0, DIFFICULTY) !== '0'.repeat(DIFFICULTY));
+        var timeElapsed = timestamp - start;
+        console.log(`Time elapsed: ${timeElapsed} milliseconds`);
+        return new Block(timestamp, lastHash, hashVal, data, nonce);
     }
 
-    static hash(timestamp, lastHash, data){
-        return SHA256(`${timestamp}${lastHash}${data}`).toString();
+    static hash(timestamp, lastHash, data, nonce){
+        return SHA256(`${timestamp}${lastHash}${data}${nonce}`).toString();
     }
 
     static blockHash(block){
-        const {timestamp, lastHash, data} = block;
-        return this.hash(timestamp, lastHash, data);
+        const {timestamp, lastHash, data, nonce} = block;
+        return this.hash(timestamp, lastHash, data, nonce);
     }
 
 }
